@@ -1,0 +1,46 @@
+Package: cnd
+Type: Package
+Title: Compositional Nutrient Diagnosis
+Version: 1.0.0
+Authors@R: c(person("Alexandre", "Leblanc", role = c("aut", "cre"), email = "alexandre.leblanc@irda.qc.ca"),
+              person("Christine", "Landry", role = "rth", email = "christine.landry@irda.qc.ca"),
+              person("Anaïs", "Charles", role = "rtm"),
+              person("Michèle", "Grenier", role = "rtm"),
+              person("Gaétan", "Daigle", role = "csl"),
+              person("Research and development institute for agri-environment (IRDA)", role = "cph"))
+Description: The compositional nutrient diagnosis (CND) estimates imbalances in the nutrient composition of plant tissues, from the latter and its associated yield. The package aims to offer a platform on which to categorize and implement the different variants of the method. It also makes available the method developed by Landry in the context of the development of the Quebec's fertilization reference charts.
+License: GPL-3
+Copyright: Research and development institute for agri-environment (IRDA)
+URL: https://www.irda.qc.ca/en/
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.1.1
+Imports:
+    catenelson,
+    dplyr,
+    methods,
+    robustbase,
+    compositions,
+    testthat
+Collate: 
+    'S4Class-CndCall.R'
+    'S4Class-CndData.R'
+    'S4Class-CndDataAugmented.R'
+    'S4Class-CndMethod.R'
+    'S4Class-CndNorm.R'
+    'cndAugment.R'
+    'S4Class-CndReference.R'
+    'S4Class-McdNorm.R'
+    'cnd.R'
+    'cndAnalysis.R'
+    'cndBind.R'
+    'cndCateNelson.R'
+    'cndCompositions.R'
+    'cndCutoff.R'
+    'cndMahalanobis.R'
+    'cndMcd.R'
+    'cndMethodLandry.R'
+    'cndReference.R'
+    'cndSubsetData.R'
+    'cndTransform.R'
+

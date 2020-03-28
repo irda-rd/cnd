@@ -1,0 +1,82 @@
+#' @description The compositional nutrient diagnosis (CND) estimates imbalances in the nutrient composition of plant tissues, from the latter and its associated yield.
+#' The method originates from Parent and Dhafir (1992) and has undergone a series of development since, which led to the appearance of multiple variants (Kihari et al., 2001; Parent et al., 2009; De Bauw et al., 2016; Parent et al., 2016).
+#' The \code{cnd} package aims to offer a platform on which to categorize and implement them.
+#' All variants, from Khiari et al. (2001) onward, share the same general steps to be performed sequentially:
+#'
+#' \describe{
+#'  \item{\code{transformation}}{transform the composition data to fulfill requirements for the analysis (e.g. normality).}
+#'  \item{\code{subset}}{identify a subgroup of observations that represent balanced plants in term of nutrients, usually chosen among high yield observations.}
+#'  \item{\code{norm}}{find a norm (location and scatter) that caracterize this group. Although not originally interpreted in this way, the location (e.g. mean or median) could be thought as representing a perfect balance, while the scatter (e.g. variance or covariance) could be used to interpret interactions in the nutrient uptake by the plant.}
+#'  \item{\code{distance}}{define some distance, on the basis of the norm, that would define nutrient imbalances.}
+#'  \item{\code{analysis}}{compute the distance on the same, or another data set, to evaluate nutrient imbalances and perform supplementary analysis. As an example, Cates-Nelson analysis has often been used on the distance to caracterise the yield associated to balanced observations for the new dataset.}
+#' }
+#'
+#' The package also makes available the method defined by Landry in the context of the development of the Quebec's fertilization reference charts (\link{cndMethodLandry}). The \code{examples} section cover all the important steps of the analysis, using the Landry's method.
+#'
+#' @section Implementation:
+#' The package relies heavily on the S4 system which allow to define classes. A class possess specified fields (called slots) on which some properties can be defined and checked everytime an object of this class is created (note than slots are accessed using "@", and is the equivalent to "$" to access elements in \code{list} or columns in \code{data.frame}).
+#' S4 classes can be used as entries of S4 functions, thus ensuring some conditions are met before any computation occurs.
+#' \cr
+#'
+#' The package defines four basic S4 classes to be known to the user:
+#' \code{\linkS4class{CndData}} which contains all the data;
+#' \code{\linkS4class{CndMethod}} which contains specificities about the 5 components of the method;
+#' \code{\linkS4class{CndNorm}} that represent the norm to export;
+#' \code{\linkS4class{CndReference}} that contains a data subset and a norm.
+#' A \code{\linkS4class{CndDataAugmented}} class has also been defined to carry supplementary information with the data, while preserving properties of \code{CndData}.
+#' \cr
+#'
+#' The workflow to perform the cnd is as follow, see the \code{examples} section to put it into practice:
+#' \enumerate{
+#' \item Define \code{CndData} and \code{CndMethod} objects.
+#' \item Transform the data using the function \code{\link{cndTransform}} (use the method's component \code{transformation}). It takes \code{CndData} and \code{CndMethod} objects and return a \code{CndData} object.
+#' \item Estimate a reference using the function \code{\link{cndReference}} (use the method's components \code{subset}, \code{norm} and \code{distance}). It takes the transformed \code{CndData} and the \code{CndMethod} objects and return a \code{CndReference} object, which contains a \code{CndNorm} object.
+#' \item Estimate the distance and perform further analysis using \code{\link{cndAnalysis}} (use the method's components \code{distance} and \code{analysis}). It uses a new transformed \code{CndData} object, the \code{CndMethod} object and the estimated \code{CndNorm} object, and return a \code{CndDataAugmented} object.
+#' }
+#' @section Development of methods:
+#' A \code{CndMethod} object is composed of objects of class \code{CndCall}, one for each of the five method's component. Theses objects define the function and arguments to call by cnd functions.
+#' Each method's component can therefore be defined using your own function; the \code{\linkS4class{CndMethod}} and \code{\linkS4class{CndCall}} help pages explain how to define their input and output.
+#' \cr
+#'
+#' If new slots are required in the analysis, we suggest to create new classes that inherit the existing classes. The data flow, structure and validity checks would then be preserved as these objects also belong to the original classes.
+#' \code{CndDataAugmented} is an example of a general class built upon \code{CndData}, while \code{McdNorm} is a class built upon \code{CndNorm} that includes information specific to the MCD estimation.
+#' If new classes are defined, one might need to specify the behaviour of the functions \code{cndSubsetData} and \code{cndBind} for that class.
+#' In cases in which results need to be passed along data, they can be stored into the slots \code{suppl} or \code{other} of an augmented data object (\code{CndDataAugmented}).
+#' \cr
+#'
+#' The package use lower camel case for variable and function names (e.g. \code{transfData}, \code{cndAnalysis}) and upper cammel case for S4 class (e.g. \code{CndData}, \code{CndMethod}) as well as constructor functions for those classes (using the same names as the classes).
+#'
+#' @section References:
+#' De Bauw P, Van Asten P, Jassogne L, Merckx R. 2016. Soil fertility gradients and production constraints for coffee and banana on volcanic mountain slopes in the East African Rift: A case study of Mt. Elgon. Agric. Ecosyst. Environ. 231: 166-175.\cr \cr
+#' Khiari L, Parent L-E, Tremblay N. 2001. Selecting the high-yield subpopulation for diagnosing nutrient imbalance in crops. Agron. J. 93(4): 802-808.\cr \cr
+#' Parent L-E, Dafir M. 1992. A theoretical concept of compositional nutrient diagnosis. J. Amer. Soc. Hort. Sci. 117(2): 239-242.\cr \cr
+#' Parent L-E, Natale W, Ziadi N. 2009. Compositional nutrient diagnosis of corn using the Mahalanobis distance as nutrient imbalance index. Can. J. Soil Sci. 89(4): 383-390. \cr \cr
+#' Parent S-E, Parent L, Rozane DE, Natale W. 2013. Plant ionome diagnosis using sound balances: case study with mango (Mangifera Indica). Front. Plant Sci. 4(article 449):1-12.
+#'
+#' @examples
+#' #Generate random data for the example
+#' n <- 50
+#' yield <- 100 + rnorm(n)
+#' X <- data.frame(x1 = runif(n), x2 = runif(n), x3 = runif(n))
+#' label <- LETTERS[(seq_len(n)-1)%%4+1] #Alternative for black and white: label <- NULL
+#'
+#' #Generate an object of class CndData.
+#' cndData <- CndData(yield = yield, X = X, label = label)
+#'
+#' #Generate an object of class CndMethod.
+#' cndMethod <- cndMethodLandry(dropNutrient = "x3", labelName = "label")
+#'
+#' #Transform the composition (X) of cndData the using cndMethod
+#' transfData <- cndTransform(cndData, cndMethod)
+#'
+#' #Estimate a reference from the transformed cndData using cndMethod
+#' cndReference <- cndReference(transfData, cndMethod)
+#' cndReference@norm
+#'
+#' #Compute the distance and other analysis specified in cndMethod,
+#' #using the estimated norm, on the same or a new dataset
+#' cndAnalysis <- cndAnalysis(transfData, cndMethod, cndNorm = cndReference@norm)
+#' cndAnalysis
+#' @docType package
+"_PACKAGE"
+

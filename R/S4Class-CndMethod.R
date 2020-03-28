@@ -1,0 +1,52 @@
+#' @title CND Method (S4 class)
+#' @description S4 class that contains information of the method to use throughout the \code{cnd}. The function \code{CndMethod} should be used to build an object.
+#' @slot transformation a \code{CndCall} object defining the function and arguments to use in \code{cndTransform}.
+#' @slot subset a \code{CndCall} object defining the function and arguments to use for a first subsetting of data in \code{cndReference}.
+#' @slot norm a \code{CndCall} object defining the function and arguments to use to define the norm in \code{cndReference}
+#' @slot distance a \code{CndCall} object defining the function and arguments that define the distance to compute in \code{cndReference} and \code{cndAnalysis}
+#' @slot analysis a \code{CndCall} object defining the function and arguments to use for supplementary analysis in \code{cndAnalysis}
+#' @details A method is made of cndCall, one for each part of the analysis. The definition of functions associated to the \code{CndCall} of \code{transformation}, \code{subset}, \code{norm} and \code{analysis} must have \code{cndData} as a parameter.
+#' In addition to \code{cndData}, the definition of function of \code{distance} must also have \code{cndNorm} as a parameter.
+#' However, these cnd object must not be indicated in the \code{args} of each of the \code{CndCall} as they are already assigned in functions \code{cndTransform}, \code{cndReference} and \code{cndAnalysis}.
+#' \cr \cr
+#' The function defined in \code{transformation}, \code{subset}, \code{distance} and \code{analysis} should all return a \code{CndData} object, or an object that inherit from \code{CndData}. We recommand that the function associated to \code{distance} return a \code{cndDataAugmented} object with a column named \code{distance} under the slot \code{other}; although not mandatory, it is the expected entry for a Cate-Nelson analysis (\code{cndCateNelson}). The function in \code{norm}, should return a \code{CndNorm} object or an object of a class that inherit from this class.
+#' \cr \cr
+#' The function \code{cndMethodLandry} call a predefined method as a whole. New methods can also be built by assembling predefined cnd functions for each section. Those already defined are as follow.
+#' \describe{
+#'  \item{\code{transformation}}{the functions \code{cndClr}, \code{cndAlr} and \code{cndIlr}.}
+#'  \item{\code{subset}}{only the \code{cndCutoff} method is presently defined. When developping new methods, the function \code{cndSubsetData} can be used once we know the observation to keep, to subset the \code{CndData} object.}
+#'  \item{\code{norm}}{only the \code{cndMcd} method is presently defined.}
+#'  \item{\code{distance}}{only the \code{cndMahalanobis} distance is presently defined.}
+#'  \item{\code{analysis}}{only the \code{cndCateNelson} analysis is presently defined.}
+#' }
+#' @export
+#' @import methods
+#' @name S4Class-CndMethod
+#' @aliases CndMethod class:CndMethod CndMethod-class
+#' @include S4Class-CndCall.R
+#' @examples
+#' #General example
+#' ##Observe slots of CndMethod
+#' getSlots("CndMethod")
+#'
+#' ##Define elements of the method
+#' transformation <- CndCall("cndClr", list(dropNutrient = "x3"))
+#' subset         <- CndCall("cndCutoff", args = list(method = "percent", param = 50))
+#' norm           <- CndCall("cndMcd", args = list(n = 100))
+#' distance       <- CndCall("cndMahalanobis", args = list())
+#' analysis       <- CndCall("cndCateNelson", args = list(min_group_x = 5, min_group_y = 5))
+#'
+#' ##Generate an object of class CndMethod.
+#' method         <- CndMethod(transformation = transformation,
+#' subset = subset, norm = norm, distance = distance, analysis = analysis)
+#'
+setClass("CndMethod", slots = c(transformation = "CndCall", subset = "CndCall", norm = "CndCall", distance = "CndCall", analysis = "CndCall"))
+#---------------------------------------------
+#' @rdname S4Class-CndMethod
+#' @export
+CndMethod = function(transformation, subset, norm, distance, analysis){
+  #Generate the object of class CndMethod
+  method <- new("CndMethod", transformation = transformation, subset = subset, norm = norm, distance = distance, analysis = analysis)
+  return(method)
+}
+#---------------------------------------------
