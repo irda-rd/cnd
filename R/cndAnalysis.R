@@ -29,8 +29,7 @@ setMethod("cndAnalysis", signature(transfData = "CndData", cndMethod = "CndMetho
   transfData <- do.call(cndMethod@distance@fun, args = c(cndData = transfData, cndNorm = cndNorm, cndMethod@distance@args))
 
   ##Further analysis implicating the data and/or the distance
-  analysis <- do.call(cndMethod@analysis@fun, args = c(cndData = transfData, cndMethod@analysis@args))
-  transfData <- cndAugment(transfData, suppl = analysis)
+  transfData <- do.call(cndMethod@analysis@fun, args = c(cndData = transfData, cndMethod@analysis@args))
 
   return(transfData)
 })
