@@ -3,7 +3,7 @@
 #' @param cndData an object of class \code{CndData}.
 #' @param cndNorm an object of class \code{CndNorm}.
 #' @param ... other parameters to pass to the function \code{mahalanobis}.
-#' @return Return \code{cndData} augmented with the squared distance as a data.frame coulmn under the slot \code{other} (i.e. the returned object is of class CndDataAugmented).
+#' @return Return \code{cndData} augmented with the squared distance (\code{distance2}) as a data.frame column under the slot \code{other} (i.e. the returned object is of class CndDataAugmented).
 #' @export
 #' @examples
 #' #General data
@@ -24,7 +24,7 @@
 setGeneric("cndMahalanobis", function(cndData, cndNorm, ...) standardGeneric("cndMahalanobis"))
 setMethod("cndMahalanobis", signature(cndData = "CndData", cndNorm = "CndNorm"), function(cndData, cndNorm, ...) {
   msd <- stats::mahalanobis(cndData@X, center = cndNorm@location, cov = cndNorm@scatter, ...)
-  msd <- data.frame(distance = msd, stringsAsFactors = FALSE)
+  msd <- data.frame(distance2 = msd, stringsAsFactors = FALSE)
   cndData <- cndAugment(cndData, other = msd)
   return(cndData)
 })

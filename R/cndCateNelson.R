@@ -1,5 +1,5 @@
 #' @title Cate Nelson analysis
-#' @description Perform a Cate Nelson analysis on a \code{CndDataAugmented} object. The function is a wrapper of the function \code{cate_nelson} from the \code{catenelson} package. The \code{yield} slot is used as \code{y}, and the column \code{distance} of the slot \code{other} is used as \code{x}.
+#' @description Perform a Cate Nelson analysis on a \code{CndDataAugmented} object. The function is a wrapper of the function \code{cate_nelson} from the \code{catenelson} package. The \code{yield} slot is used as \code{y}, and the column \code{distance2} of the slot \code{other} is used as \code{x}.
 #' @param cndData An object of class \code{CndDataAugmented}, with a column named \code{distance} under the slot \code{other}, representing the squared distance from the centroid.
 #' @param labelName The column name of the  \code{cndData}'s \code{label} slot to be use as the argument label in the function \code{cate_nelson}.
 #' @param n_group,trend,x_lab,y_lab \code{cate_nelson}'s parameter with imposed default values specific to cnd.
@@ -34,7 +34,7 @@ setMethod("cndCateNelson", signature(cndData = "CndDataAugmented"), function(cnd
     stop("labelName must be of length one and correspond to a column name of the label slot of the cndData ")
   }
 
-  CN = cate_nelson(x = cndData@other$distance, y = cndData@yield$yield, label = label, n_group = n_group, trend = trend,
+  CN = cate_nelson(x = cndData@other$distance2, y = cndData@yield$yield, label = label, n_group = n_group, trend = trend,
                    x_lab = x_lab, y_lab = y_lab, ...)
   cndData <- cndAugment(cndData, suppl = list(cateNelson = CN))
 
