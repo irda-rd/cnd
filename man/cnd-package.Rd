@@ -109,6 +109,7 @@ Other contributors:
   \item Anaïs Charles [research team member]
   \item Michèle Grenier [research team member]
   \item Gaétan Daigle [consultant]
+  \item Serge-Étienne Parent [consultant]
   \item Research and development institute for agri-environment (IRDA) [copyright holder]
 }
 
