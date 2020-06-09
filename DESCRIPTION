@@ -1,12 +1,13 @@
 Package: cnd
 Type: Package
 Title: Compositional Nutrient Diagnosis
-Version: 1.0.0
+Version: 1.1
 Authors@R: c(person("Alexandre", "Leblanc", role = c("aut", "cre"), email = "alexandre.leblanc@irda.qc.ca"),
               person("Christine", "Landry", role = "rth", email = "christine.landry@irda.qc.ca"),
               person("Anaïs", "Charles", role = "rtm"),
               person("Michèle", "Grenier", role = "rtm"),
               person("Gaétan", "Daigle", role = "csl"),
+              person("Serge-Étienne", "Parent", role = "csl"),
               person("Research and development institute for agri-environment (IRDA)", role = "cph"))
 Description: The compositional nutrient diagnosis (CND) estimates imbalances in the nutrient composition of plant tissues, from the latter and its associated yield. The package aims to offer a platform on which to categorize and implement the different variants of the method. It also makes available the method developed by Landry in the context of the development of the Quebec's fertilization reference charts.
 License: GPL-3

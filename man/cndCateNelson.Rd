@@ -17,7 +17,7 @@ cndCateNelson(cndData, n_group = 2, trend = "negative",
 \item{...}{Other arguments to pass to the function \code{cate_nelson}.}
 }
 \description{
-Perform a Cate Nelson analysis on a \code{CndDataAugmented} object. The function is a wrapper of the function \code{cate_nelson} from the \code{catenelson} package. The \code{yield} slot is used as \code{y}, and the column \code{distance} of the slot \code{other} is used as \code{x}.
+Perform a Cate Nelson analysis on a \code{CndDataAugmented} object. The function is a wrapper of the function \code{cate_nelson} from the \code{catenelson} package. The \code{yield} slot is used as \code{y}, and the column \code{distance2} of the slot \code{other} is used as \code{x}.
 }
 \examples{
 #General data

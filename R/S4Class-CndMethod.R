@@ -3,13 +3,13 @@
 #' @slot transformation a \code{CndCall} object defining the function and arguments to use in \code{cndTransform}.
 #' @slot subset a \code{CndCall} object defining the function and arguments to use for a first subsetting of data in \code{cndReference}.
 #' @slot norm a \code{CndCall} object defining the function and arguments to use to define the norm in \code{cndReference}
-#' @slot distance a \code{CndCall} object defining the function and arguments that define the distance to compute in \code{cndReference} and \code{cndAnalysis}
+#' @slot distance a \code{CndCall} object defining the function and arguments that define the squared distance to compute in \code{cndReference} and \code{cndAnalysis}.
 #' @slot analysis a \code{CndCall} object defining the function and arguments to use for supplementary analysis in \code{cndAnalysis}
 #' @details A method is made of cndCall, one for each part of the analysis. The definition of functions associated to the \code{CndCall} of \code{transformation}, \code{subset}, \code{norm} and \code{analysis} must have \code{cndData} as a parameter.
 #' In addition to \code{cndData}, the definition of function of \code{distance} must also have \code{cndNorm} as a parameter.
 #' However, these cnd object must not be indicated in the \code{args} of each of the \code{CndCall} as they are already assigned in functions \code{cndTransform}, \code{cndReference} and \code{cndAnalysis}.
 #' \cr \cr
-#' The function defined in \code{transformation}, \code{subset}, \code{distance} and \code{analysis} should all return a \code{CndData} object, or an object that inherit from \code{CndData}. We recommand that the function associated to \code{distance} return a \code{cndDataAugmented} object with a column named \code{distance} under the slot \code{other}; although not mandatory, it is the expected entry for a Cate-Nelson analysis (\code{cndCateNelson}). The function in \code{norm}, should return a \code{CndNorm} object or an object of a class that inherit from this class.
+#' The function defined in \code{transformation}, \code{subset}, \code{distance} and \code{analysis} should all return a \code{CndData} object, or an object that inherit from \code{CndData}. We recommand that the function associated to \code{distance} return a \code{cndDataAugmented} object with a column named \code{distance2}, representing the squared distance, under the slot \code{other}. Although not mandatory, it is the expected entry for a Cate-Nelson analysis (\code{cndCateNelson}). The function in \code{norm}, should return a \code{CndNorm} object or an object of a class that inherit from this class.
 #' \cr \cr
 #' The function \code{cndMethodLandry} call a predefined method as a whole. New methods can also be built by assembling predefined cnd functions for each section. Those already defined are as follow.
 #' \describe{

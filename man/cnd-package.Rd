@@ -16,7 +16,7 @@ All variants, from Khiari et al. (2001) onward, share the same general steps to 
  \item{\code{subset}}{identify a subgroup of observations that represent balanced plants in term of nutrients, usually chosen among high yield observations.}
  \item{\code{norm}}{find a norm (location and scatter) that caracterize this group. Although not originally interpreted in this way, the location (e.g. mean or median) could be thought as representing a perfect balance, while the scatter (e.g. variance or covariance) could be used to interpret interactions in the nutrient uptake by the plant.}
  \item{\code{distance}}{define some distance, on the basis of the norm, that would define nutrient imbalances.}
- \item{\code{analysis}}{compute the distance on the same, or another data set, to evaluate nutrient imbalances and perform supplementary analysis. As an example, Cates-Nelson analysis has often been used on the distance to caracterise the yield associated to balanced observations for the new dataset.}
+ \item{\code{analysis}}{compute the distance on the same, or another data set, to evaluate nutrient imbalances and perform supplementary analysis. As an example, Cates-Nelson analysis has often been used on the squared distance to characterise the yield associated to balanced observations for the new dataset.}
 }
 
 The package also makes available the method defined by Landry in the context of the development of the Quebec's fertilization reference charts (\link{cndMethodLandry}). The \code{examples} section cover all the important steps of the analysis, using the Landry's method.
@@ -109,6 +109,7 @@ Other contributors:
   \item Anaïs Charles [research team member]
   \item Michèle Grenier [research team member]
   \item Gaétan Daigle [consultant]
+  \item Serge-Étienne Parent [consultant]
   \item Research and development institute for agri-environment (IRDA) [copyright holder]
 }
 

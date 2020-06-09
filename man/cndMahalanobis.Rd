@@ -14,7 +14,7 @@ cndMahalanobis(cndData, cndNorm, ...)
 \item{...}{other parameters to pass to the function \code{mahalanobis}.}
 }
 \value{
-Return \code{cndData} augmented with the squared distance as a data.frame coulmn under the slot \code{other} (i.e. the returned object is of class CndDataAugmented).
+Return \code{cndData} augmented with the squared distance (\code{distance2}) as a data.frame column under the slot \code{other} (i.e. the returned object is of class CndDataAugmented).
 }
 \description{
 Compute the Mahalanobis squared distance on the \code{X} slot of \code{cndData}, using \code{location} and \code{scatter} of \code{cndNorm}. The function is a wrapper of the function \code{mahalanobis} from the package \code{stats}.
