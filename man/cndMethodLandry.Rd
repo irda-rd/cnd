@@ -18,6 +18,7 @@ cndMethodLandry(dropNutrient = "fill", percent = 25, nSamp = 1000,
 }
 \description{
 A predefined method developped by Landry in the context of the development of the Quebec's fertilization reference charts. Some flexibility is provided on the parameter values to consider during the analysis.
+The method is used, either as a whole or only up to the estimation of the norm, to compute nutrient exportations.
 }
 \details{
 The steps of the predefined method, and some elements of context, are as follow:

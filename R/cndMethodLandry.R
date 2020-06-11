@@ -1,5 +1,6 @@
 #' @title Landry's method
 #' @description A predefined method developped by Landry in the context of the development of the Quebec's fertilization reference charts. Some flexibility is provided on the parameter values to consider during the analysis.
+#' The method is used, either as a whole or only up to the estimation of the norm, to compute nutrient exportations.
 #' @param dropNutrient (transformation) the nutrient to drop (column name of the slot \code{X}) after the clr transformation.
 #' @param percent (subset) the percentage of observation to include in the high yield subpopulation.
 #' @param nSamp (norm) the number of subsets used for initial estimates (\code{integer}) or the name of one of the method: \code{best}, \code{exact}, \code{deterministic}. See the function \code{covMcd} from the \code{robustbase} package for more details on these methods.
