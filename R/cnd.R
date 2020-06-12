@@ -1,5 +1,5 @@
 #' @description The compositional nutrient diagnosis (CND) estimates imbalances in the nutrient composition of plant tissues, from the latter and its associated yield.
-#' The method originates from Parent and Dhafir (1992) and has undergone a series of development since, which led to the appearance of multiple variants (Kihari et al., 2001; Parent et al., 2009; De Bauw et al., 2016; Parent et al., 2016).
+#' The method originates from Parent and Dhafir (1992) and has undergone a series of development since, which led to the appearance of multiple variants (Kihari et al., 2001; Parent et al., 2009; De Bauw et al., 2016; Parent et al., 2013).
 #' The \code{cnd} package aims to offer a platform on which to categorize and implement them.
 #' All variants, from Khiari et al. (2001) onward, share the same general steps to be performed sequentially:
 #'

@@ -1,7 +1,7 @@
 Package: cnd
 Type: Package
 Title: Compositional Nutrient Diagnosis
-Version: 1.1.1
+Version: 1.1.2
 Authors@R: c(person("Alexandre", "Leblanc", role = c("aut", "cre"), email = "alexandre.leblanc@irda.qc.ca"),
               person("Christine", "Landry", role = "rth", email = "christine.landry@irda.qc.ca"),
               person("Anaïs", "Charles", role = "rtm"),
