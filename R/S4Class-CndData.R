@@ -92,17 +92,18 @@ setValidity(Class = "CndData", method <- function(object){
   return(check)
 })
 #--------------------------------------------------------------------
-#' @details The function \code{CndData} should be used to build an object. Both arguments \code{yield} and \code{label} can be provided as vectors, they will be coerced into \code{data.frame}. If provided as vector, the column name of \code{label} would be "label", and the one \code{yield} would be "yield". For the latter, the column name would also be overwriten as "yield" if the entry is a \code{data.frame}. If empty, the number of rows of \code{label} would be matched to those of \code{yield} and \code{X} at initialisation.
+#' @details The function \code{CndData} should be used to build an object. Both arguments \code{yield} and \code{label} can be provided as vectors, they will be coerced into \code{data.frame}. If provided as vector, the column name of \code{label} would be "label", and the one \code{yield} would be "yield". For the latter, the column name would also be overwriten as "yield" if the entry is a \code{data.frame}. If empty, the number of rows of \code{label} would be matched to those of \code{yield} and \code{X} at initialisation. \cr \cr
+#' The logical parameter \code{conformClass} (\code{FALSE} by default) indicates if the slots \code{X} and \code{yield} must be automatically converted into \code{numeric} to respect the intended classes. The logical parameter \code{removeNA} (\code{FALSE} by default), indicates if rows containing \code{NA} in either \code{X} or \code{yield} must be removed; the operation is performed after class conversion from \code{conformClass = TRUE}. 
 #' @rdname S4Class-CndData
 #' @export
 #'
-CndData = function(yield = data.frame(yield = numeric(0)), X = data.frame(), label = data.frame()){
+CndData = function(yield = data.frame(yield = numeric(0)), X = data.frame(), label = data.frame(), removeNA = FALSE, conformClass = FALSE){
   #Generate the object of class CndData and check
-  data <- new("CndData", yield = yield, X = X, label = label)
+  data <- new("CndData", yield = yield, X = X, label = label, removeNA = removeNA, conformClass = conformClass)
   return(data)
 }
 #--------------------------------------------------------------------
-setMethod("initialize", "CndData", function(.Object,  yield = numeric(0), X = data.frame(), label = data.frame(), ...) {
+setMethod("initialize", "CndData", function(.Object,  yield = numeric(0), X = data.frame(), label = data.frame(), removeNA = FALSE, conformClass = FALSE, ...) {
 
   #Define the yield slot
   if(!is(yield, "data.frame")){
@@ -132,6 +133,29 @@ setMethod("initialize", "CndData", function(.Object,  yield = numeric(0), X = da
   }else{
     #Case with label as vector
     .Object@label <- data.frame(label = label)
+  }
+
+  #Enforce conformity (option)
+  ##Conform classes (for yield and X)
+  if(conformClass){
+    ###Slot X
+    for(i in seq_len(ncol(.Object@X))){
+      .Object@X[[i]] <- as.numeric(as.character(.Object@X[[i]]))
+    }
+    ###Slot yield
+    .Object@yield$yield <- as.numeric(as.character(.Object@yield$yield))
+  }
+  
+  ##Remove rows with at least one NA in X or yield
+  if(removeNA){
+    inaYield <- unique(which(is.na(.Object@yield),arr.ind = TRUE)[,"row"])
+    inaX <- unique(which(is.na(.Object@X),arr.ind = TRUE)[,"row"])
+    ina <- unique(c(inaX, inaYield))
+    if(length(ina) > 0){
+      .Object@X <- .Object@X[-ina,,drop = FALSE]
+      .Object@yield <- .Object@yield[-ina,,drop = FALSE]
+      .Object@label <- .Object@label[-ina,,drop = FALSE]
+    }
   }
 
   #.Object <- callNextMethod(.Object)

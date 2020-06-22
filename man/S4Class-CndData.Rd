@@ -10,7 +10,7 @@
 \title{CND Data (S4 class)}
 \usage{
 CndData(yield = data.frame(yield = numeric(0)), X = data.frame(),
-  label = data.frame())
+  label = data.frame(), removeNA = FALSE, conformClass = FALSE)
 }
 \description{
 S4 class that contains information on the data to use for the cnd analysis.
@@ -18,7 +18,8 @@ S4 class that contains information on the data to use for the cnd analysis.
 \details{
 The validity method check if: \code{yield} only possesses one column; \code{yield}, \code{X} and \code{label} have the same number of lines; columns of \code{yield} and \code{X} are of class \code{numeric}.
 
-The function \code{CndData} should be used to build an object. Both arguments \code{yield} and \code{label} can be provided as vectors, they will be coerced into \code{data.frame}. If provided as vector, the column name of \code{label} would be "label", and the one \code{yield} would be "yield". For the latter, the column name would also be overwriten as "yield" if the entry is a \code{data.frame}. If empty, the number of rows of \code{label} would be matched to those of \code{yield} and \code{X} at initialisation.
+The function \code{CndData} should be used to build an object. Both arguments \code{yield} and \code{label} can be provided as vectors, they will be coerced into \code{data.frame}. If provided as vector, the column name of \code{label} would be "label", and the one \code{yield} would be "yield". For the latter, the column name would also be overwriten as "yield" if the entry is a \code{data.frame}. If empty, the number of rows of \code{label} would be matched to those of \code{yield} and \code{X} at initialisation. \cr \cr
+The logical parameter \code{conformClass} (\code{FALSE} by default) indicates if the slots \code{X} and \code{yield} must be automatically converted into \code{numeric} to respect the intended classes. The logical parameter \code{removeNA} (\code{FALSE} by default), indicates if rows containing \code{NA} in either \code{X} or \code{yield} must be removed; the operation is performed after class conversion from \code{conformClass = TRUE}.
 }
 \section{Slots}{
 
