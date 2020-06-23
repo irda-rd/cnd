@@ -27,13 +27,21 @@ setMethod("cndMcd", signature(cndData = "CndData"), function(cndData, nSamp, ...
     warning("The number of rows of X (m) for the mcd is recommended to respect m > 5p, with p the number of columns")
   }
 
-  #Computation of the norm
+  #Computation of mcd
   mcd <- covMcd(x = cndData@X, nsamp = nSamp)
-  location <- mcd$center
-  scatter <- mcd$cov
   logDet <- mcd$crit
-  logicalSubset <- seq_len(m) %in% mcd$best
-  subset <- cndSubsetData(cndData, logicalSubset)
-  norm <- McdNorm(location = location, scatter = scatter, logDet = logDet, subset = subset)
+  
+  #Acquire subsets
+  logicalSubsetRaw <- seq_len(m) %in% mcd$best
+  subsetRaw <- cndSubsetData(cndData, logicalSubsetRaw)
+  
+  logicalSubsetReweighted <- mcd$raw.weights == 1
+  subsetReweighted <- cndSubsetData(cndData, logicalSubsetReweighted)
+
+  #Acquire the norm
+  location <- mcd$center #Correspond to apply(subset_reweighted@X,MARGIN = 2, mean)
+  scatter <- mcd$cov #Correspond to mcd$cnp2[1]*mcd$cnp2[2]*cov(subset_reweighted@X)
+
+  norm <- McdNorm(location = location, scatter = scatter, logDet = logDet, subsetRaw = subsetRaw, subsetReweighted = subsetReweighted)
   return(norm)
 })

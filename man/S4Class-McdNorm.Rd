@@ -10,10 +10,11 @@
 \title{CND Minimum covariance determinant estimates (S4 Class)}
 \usage{
 McdNorm(location = numeric(0), scatter = matrix(numeric(0), ncol = 0,
-  nrow = 0), logDet = numeric(0), subset = CndData())
+  nrow = 0), logDet = numeric(0), subsetRaw = CndData(),
+  subsetReweighted = CndData())
 }
 \description{
-S4 class that extend the class \code{CndNorm} to also include the logarithm of the covariance matrix determinant \code{logDet} associated to the robust method.
+S4 class that extend the class \code{CndNorm} to also include the logarithm of the covariance matrix determinant \code{logDet} associated to the robust method and subsets involved in the calculation of the location and scatter.
 }
 \details{
 The validity method check if: \code{location} and \code{scatter} respect validity checks defined for \code{CndNorm} and if \code{logDet} only possess one value.
@@ -29,7 +30,9 @@ The function \code{McdNorm} can be used to build an object.
 
 \item{\code{logDet}}{a \code{matrix}, logarithm of the determinant of the covariance matrix, which was minimized in the mcd.}
 
-\item{\code{subset}}{a \code{CndData} object, representing the subset of observation that minimized the determinant, and used to establish the location and scatter.}
+\item{\code{subsetRaw}}{a \code{CndData} object, representing the subset of observation that minimized the determinant.}
+
+\item{\code{subsetReweighted}}{a \code{CndData} object, representing the subset of observation resulting from the reweighting.}
 }}
 
 \examples{
@@ -51,6 +54,6 @@ label <- LETTERS[(seq_len(n)-1)\%\%4+1]
 subset <- CndData(yield = yield, X = X, label = label)
 
 ##Generate an object of class McdNorm
-norm <- McdNorm(location = location, scatter = scatter,logDet = logDet, subset = subset)
+norm <- McdNorm(location = location, scatter = scatter,logDet = logDet, subsetRaw = subset, subsetReweighted = subset)
 
 }
