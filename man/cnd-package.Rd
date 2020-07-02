@@ -96,6 +96,7 @@ cndAnalysis
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://github.com/irda-rd/cnd}
   \item \url{https://www.irda.qc.ca/en/}
 }
 
