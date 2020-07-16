@@ -19,7 +19,7 @@ All variants, from Khiari et al. (2001) onward, share the same general steps to 
  \item{\code{analysis}}{compute the distance on the same, or another data set, to evaluate nutrient imbalances and perform supplementary analysis. As an example, Cates-Nelson analysis has often been used on the squared distance to characterise the yield associated to balanced observations for the new dataset.}
 }
 
-The package also makes available the method defined by Landry in the context of the development of the Quebec's fertilization reference charts (\link{cndMethodLandry}). The \code{examples} section cover all the important steps of the analysis, using the Landry's method.
+The package also makes available the method defined by the Research and development institute for the agri-environment (IRDA) in the context of the development of the Quebec's fertilization reference charts (\link{cndMethodRobustIrda}). The \code{examples} section cover all the important steps of the analysis, using this method.
 }
 \section{Implementation}{
 
@@ -79,7 +79,7 @@ label <- LETTERS[(seq_len(n)-1)\%\%4+1] #Alternative for black and white: label 
 cndData <- CndData(yield = yield, X = X, label = label)
 
 #Generate an object of class CndMethod.
-cndMethod <- cndMethodLandry(dropNutrient = "x3", labelName = "label")
+cndMethod <- cndMethodRobustIrda(dropNutrient = "x3", labelName = "label")
 
 #Transform the composition (X) of cndData the using cndMethod
 transfData <- cndTransform(cndData, cndMethod)

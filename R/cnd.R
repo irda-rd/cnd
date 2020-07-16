@@ -11,7 +11,7 @@
 #'  \item{\code{analysis}}{compute the distance on the same, or another data set, to evaluate nutrient imbalances and perform supplementary analysis. As an example, Cates-Nelson analysis has often been used on the squared distance to characterise the yield associated to balanced observations for the new dataset.}
 #' }
 #'
-#' The package also makes available the method defined by Landry in the context of the development of the Quebec's fertilization reference charts (\link{cndMethodLandry}). The \code{examples} section cover all the important steps of the analysis, using the Landry's method.
+#' The package also makes available the method defined by the Research and development institute for the agri-environment (IRDA) in the context of the development of the Quebec's fertilization reference charts (\link{cndMethodRobustIrda}). The \code{examples} section cover all the important steps of the analysis, using this method.
 #'
 #' @section Implementation:
 #' The package relies heavily on the S4 system which allow to define classes. A class possess specified fields (called slots) on which some properties can be defined and checked everytime an object of this class is created (note than slots are accessed using "@", and is the equivalent to "$" to access elements in \code{list} or columns in \code{data.frame}).
@@ -64,7 +64,7 @@
 #' cndData <- CndData(yield = yield, X = X, label = label)
 #'
 #' #Generate an object of class CndMethod.
-#' cndMethod <- cndMethodLandry(dropNutrient = "x3", labelName = "label")
+#' cndMethod <- cndMethodRobustIrda(dropNutrient = "x3", labelName = "label")
 #'
 #' #Transform the composition (X) of cndData the using cndMethod
 #' transfData <- cndTransform(cndData, cndMethod)

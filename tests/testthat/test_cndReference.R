@@ -10,7 +10,7 @@ label <- LETTERS[(seq_len(n)-1)%%4+1]
 cndData <- CndData(yield = yield, X = X, label = label)
 
 ##CndReference
-cndMethod <- cndMethodLandry(dropNutrient = "x3")
+cndMethod <- cndMethodRobustIrda(dropNutrient = "x3")
 transfData <- cndTransform(cndData, cndMethod)
 
 #--------------------------------------------------------------------

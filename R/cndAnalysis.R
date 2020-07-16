@@ -15,7 +15,7 @@
 #' cndData <- CndData(yield = yield, X = X)
 #'
 #' #Compute a reference
-#' cndMethod <- cndMethodLandry(dropNutrient = "x3")
+#' cndMethod <- cndMethodRobustIrda(dropNutrient = "x3")
 #' transfData <- cndTransform(cndData, cndMethod)
 #' cndReference <- cndReference(transfData, cndMethod)
 #'

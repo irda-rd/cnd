@@ -20,7 +20,7 @@ However, these cnd object must not be indicated in the \code{args} of each of th
 \cr \cr
 The function defined in \code{transformation}, \code{subset}, \code{distance} and \code{analysis} should all return a \code{CndData} object, or an object that inherit from \code{CndData}. We recommand that the function associated to \code{distance} return a \code{cndDataAugmented} object with a column named \code{distance2}, representing the squared distance, under the slot \code{other}. Although not mandatory, it is the expected entry for a Cate-Nelson analysis (\code{cndCateNelson}). The function in \code{norm}, should return a \code{CndNorm} object or an object of a class that inherit from this class.
 \cr \cr
-The function \code{cndMethodLandry} call a predefined method as a whole. New methods can also be built by assembling predefined cnd functions for each section. Those already defined are as follow.
+The function \code{cndMethodRobustIrda} call a predefined method as a whole. New methods can also be built by assembling predefined cnd functions for each section. Those already defined are as follow.
 \describe{
  \item{\code{transformation}}{the functions \code{cndClr}, \code{cndAlr} and \code{cndIlr}.}
  \item{\code{subset}}{only the \code{cndCutoff} method is presently defined. When developping new methods, the function \code{cndSubsetData} can be used once we know the observation to keep, to subset the \code{CndData} object.}
