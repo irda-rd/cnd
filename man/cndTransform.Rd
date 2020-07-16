@@ -28,7 +28,7 @@ label <- LETTERS[(seq_len(n)-1)\%\%4+1] #Alternative for black and white: label 
 cndData <- CndData(yield = yield, X = X, label = label)
 
 #Generate an object of class CndMethod.
-cndMethod <- cndMethodLandry(dropNutrient = "x3", labelName = "label")
+cndMethod <- cndMethodRobustIrda(dropNutrient = "x3", labelName = "label")
 
 #Transform the composition (X) of cndData the using cndMethod
 cndTransform(cndData, cndMethod)

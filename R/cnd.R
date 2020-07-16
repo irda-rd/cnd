@@ -1,17 +1,17 @@
 #' @description The compositional nutrient diagnosis (CND) estimates imbalances in the nutrient composition of plant tissues, from the latter and its associated yield.
-#' The method originates from Parent and Dhafir (1992) and has undergone a series of development since, which led to the appearance of multiple variants (Kihari et al., 2001; Parent et al., 2009; De Bauw et al., 2016; Parent et al., 2016).
+#' The method originates from Parent and Dhafir (1992) and has undergone a series of development since, which led to the appearance of multiple variants under this name (Kihari et al., 2001; Parent et al., 2009) as well as similar work in its continuity (Parent et al., 2013; De Bauw et al., 2016).
 #' The \code{cnd} package aims to offer a platform on which to categorize and implement them.
-#' All variants, from Khiari et al. (2001) onward, share the same general steps to be performed sequentially:
+#' All variants, from Khiari et al. (2001) onward, mostly share the same general steps to be performed sequentially:
 #'
 #' \describe{
 #'  \item{\code{transformation}}{transform the composition data to fulfill requirements for the analysis (e.g. normality).}
 #'  \item{\code{subset}}{identify a subgroup of observations that represent balanced plants in term of nutrients, usually chosen among high yield observations.}
 #'  \item{\code{norm}}{find a norm (location and scatter) that caracterize this group. Although not originally interpreted in this way, the location (e.g. mean or median) could be thought as representing a perfect balance, while the scatter (e.g. variance or covariance) could be used to interpret interactions in the nutrient uptake by the plant.}
-#'  \item{\code{distance}}{define some distance, on the basis of the norm, that would define nutrient imbalances.}
-#'  \item{\code{analysis}}{compute the distance on the same, or another data set, to evaluate nutrient imbalances and perform supplementary analysis. As an example, Cates-Nelson analysis has often been used on the squared distance to characterise the yield associated to balanced observations for the new dataset.}
+#'  \item{\code{distance}}{compute some distance, on the basis of the norm, that would define nutrient imbalances.}
+#'  \item{\code{analysis}}{perform supplementary analysis, generally using the distance. Cate-Nelson analysis on the squared distance has often been used, as a classification method, to estimate yield and distance thresholds that delineate balanced compositions for a new dataset.}
 #' }
 #'
-#' The package also makes available the method defined by Landry in the context of the development of the Quebec's fertilization reference charts (\link{cndMethodLandry}). The \code{examples} section cover all the important steps of the analysis, using the Landry's method.
+#' The package also makes available the method defined by the Research and development institute for the agri-environment (IRDA) in the context of the development of the Quebec's fertilization reference charts (\link{cndMethodRobustIrda}). The \code{examples} section cover all the important steps of the analysis, using this method.
 #'
 #' @section Implementation:
 #' The package relies heavily on the S4 system which allow to define classes. A class possess specified fields (called slots) on which some properties can be defined and checked everytime an object of this class is created (note than slots are accessed using "@", and is the equivalent to "$" to access elements in \code{list} or columns in \code{data.frame}).
@@ -64,7 +64,7 @@
 #' cndData <- CndData(yield = yield, X = X, label = label)
 #'
 #' #Generate an object of class CndMethod.
-#' cndMethod <- cndMethodLandry(dropNutrient = "x3", labelName = "label")
+#' cndMethod <- cndMethodRobustIrda(dropNutrient = "x3", labelName = "label")
 #'
 #' #Transform the composition (X) of cndData the using cndMethod
 #' transfData <- cndTransform(cndData, cndMethod)

@@ -29,7 +29,7 @@ X <- data.frame(x1 = runif(n), x2 = runif(n), x3 = runif(n))
 cndData <- CndData(yield = yield, X = X)
 
 ##Identify the method and transform the data
-cndMethod <- cndMethodLandry(dropNutrient = "x3")
+cndMethod <- cndMethodRobustIrda(dropNutrient = "x3")
 transfData <- cndTransform(cndData, cndMethod)
 
 ##Compute the reference according to the defined method

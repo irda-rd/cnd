@@ -9,7 +9,7 @@ label <- LETTERS[(seq_len(n)-1)%%4+1]
 cndData <- CndData(yield = yield, X = X, label = label)
 
 ##CndMethod
-cndMethod <- cndMethodLandry(dropNutrient = "x3")
+cndMethod <- cndMethodRobustIrda(dropNutrient = "x3")
 
 #--------------------------------------------------------------------
 test_that("the function return an object with the appropriate class", {
