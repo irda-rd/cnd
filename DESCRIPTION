@@ -9,7 +9,7 @@ Authors@R: c(person("Alexandre", "Leblanc", role = c("aut", "cre"), email = "ale
               person("Gaétan", "Daigle", role = "csl"),
               person("Serge-Étienne", "Parent", role = "csl"),
               person("Research and development institute for agri-environment (IRDA)", role = "cph"))
-Description: The compositional nutrient diagnosis (CND) estimates imbalances in the nutrient composition of plant tissues, from the latter and its associated yield. The package aims to offer a platform on which to categorize and implement the different variants of the method. It also makes available the method developed by the Research and development institute for the agri-environment (IRDA) in the context of the development of the Quebec's fertilization reference charts.
+Description: The compositional nutrient diagnosis (CND) estimates imbalances in the nutrient composition of plant tissues, from the latter and its associated yield. The package aims to offer a platform on which to categorize and implement the different variants of the method. It also makes available the method developed by the Research and development institute for the agri-environment (IRDA) in the context of the development of the Quebec's fertilization reference charts. This work was supported by Ministère de l'Agriculture, des Pêcheries et de l'Alimentation du Québec (MAPAQ).
 License: GPL-3
 Copyright: Research and development institute for agri-environment (IRDA)
 URL: https://github.com/irda-rd/cnd, https://www.irda.qc.ca/en/
